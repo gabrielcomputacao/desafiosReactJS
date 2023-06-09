@@ -1,22 +1,12 @@
-import { useEffect, useState } from "react"
+import {  useState } from "react"
 import './App.css';
+import ApiFetchHook from "./components/hook/ApiFetchHook";
+
 
 function App() {
 
-  const [data, setData] = useState([]);
-  const [error , setError] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
   const [hasLike, setHasLike] = useState([]);
-
-  useEffect( () =>{
-
-    fetch('https://api.github.com/orgs/twitter/repos')
-    .then( result => result.json())
-    .then( (data) => setData( data) )
-    .catch( (e) => setError(e))
-    .finally( () => setIsLoading(false))
-
-  } , []);
+  const { data,error,isLoading } = ApiFetchHook('google');
 
   function handleLike (id){
 
@@ -25,8 +15,9 @@ function App() {
 
       if(exist){
 
-        return prevState.map( item =>{
+        return prevState.map( item => {
           if(item.id === id){ 
+            console.log('entrou');
             return { ...item, liked: !item.liked }
           }else{
             return item;
@@ -47,7 +38,7 @@ function App() {
       {
         data.map( (item) => (
             <div key={item.id} id={item.id}>
-                <span> {item.name} - {item.full_name} - {item.owner.login}   </span> <button onClick={ () => handleLike(item.id)} >  {  hasLike.find( element => element.id === item.id) ? 'Descutir' : 'curtir'   }  </button>
+                <span> {item.name} - {item.full_name} - {item.owner.login}   </span> <button onClick={ () => handleLike(item.id)} >  {  hasLike.find( element => element.id === item.id && element.liked ) ? 'Descutir' : 'curtir'   }  </button>
                 <br /> <br />
                 
             </div> 
@@ -58,12 +49,14 @@ function App() {
       <h3>Curtidos</h3>
       <div>
         {
-          hasLike.map( element => (
-                <div>
+          hasLike.filter( element => element.liked).map( element => 
+            (
+               <div key={element.id}>
                   <span> {element.id} </span>
                   <span> {element.liked} </span>
                 </div>
-            ))
+            )
+           )
         }
 
       </div>
