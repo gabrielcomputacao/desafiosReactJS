@@ -1,4 +1,4 @@
-import {  useState } from "react"
+import {  useEffect, useState } from "react"
 import './App.css';
 import ApiFetchHook from "./components/hook/ApiFetchHook";
 
@@ -7,6 +7,24 @@ function App() {
 
   const [hasLike, setHasLike] = useState([]);
   const { data,error,isLoading } = ApiFetchHook('google');
+
+    useEffect( ()=>{
+
+      const storage = localStorage.getItem('haslike');
+
+      if(storage){
+        setHasLike( JSON.parse(storage) );
+      }
+
+    }, []);
+
+    useEffect( () =>{
+
+      if(hasLike.length === 0) return;
+
+      localStorage.setItem( 'haslike' , JSON.stringify(hasLike) );
+
+    }, [hasLike])
 
   function handleLike (id){
 
