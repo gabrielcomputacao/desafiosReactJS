@@ -6,6 +6,7 @@ function App() {
   const [data, setData] = useState([]);
   const [error , setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [hasLike, setHasLike] = useState([]);
 
   useEffect( () =>{
 
@@ -19,31 +20,53 @@ function App() {
 
   function handleLike (id){
 
-      const resultado = data.map( (item) => {
-        if(item.id === id){
-            return {
-              ...item,
-              liked: !item.liked,
-            }
-        }
-        return item;
-      } )
-      setData(resultado);
-      
+    setHasLike( prevState => {
+      const exist = prevState.find( element => element.id === id );
+
+      if(exist){
+
+        return prevState.map( item =>{
+          if(item.id === id){ 
+            return { ...item, liked: !item.liked }
+          }else{
+            return item;
+          }
+
+        })
+
+      }
+
+      return [ ...prevState , { id, liked: true } ]
+    })
   }
 
   return (
     <div>
       { isLoading && <p> Carregando.. </p>  } 
+      { error && <p>Erro ao carregar dados</p> }
       {
         data.map( (item) => (
             <div key={item.id} id={item.id}>
-                <span> {item.name} - {item.full_name} - {item.owner.login}   </span> <button onClick={ () => handleLike(item.id)} >  { item.liked ? 'Discurtir' : 'Curtir'}  </button>
+                <span> {item.name} - {item.full_name} - {item.owner.login}   </span> <button onClick={ () => handleLike(item.id)} >  {  hasLike.find( element => element.id === item.id) ? 'Descutir' : 'curtir'   }  </button>
                 <br /> <br />
                 
             </div> 
         ))
       }
+
+      <br /><br /><br />
+      <h3>Curtidos</h3>
+      <div>
+        {
+          hasLike.map( element => (
+                <div>
+                  <span> {element.id} </span>
+                  <span> {element.liked} </span>
+                </div>
+            ))
+        }
+
+      </div>
 
 
     </div>
