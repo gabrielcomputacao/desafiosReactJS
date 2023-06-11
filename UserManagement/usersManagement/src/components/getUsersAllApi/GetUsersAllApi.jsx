@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 export default function GetUsersAllApi(){
     
-    const [users , setUsers] = useState([]);
+    const [getUsers , setGetUsers] = useState([]);
 
     useEffect(()=>{
 
@@ -13,11 +13,11 @@ export default function GetUsersAllApi(){
            }
         })
         .then( result => result.json())
-        .then( (dados) =>setUsers(dados.data) )
+        .then( (dados) => setGetUsers(dados.data) )
         .catch( e => console.log(e))
 
     } , []);
 
-    return { users };
+    return {  getUsers,  setGetUsers };
 
 }

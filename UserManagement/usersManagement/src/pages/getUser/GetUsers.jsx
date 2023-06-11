@@ -1,3 +1,6 @@
+
+
+import ButtonDelete from "../../components/buttons/ButtonDelete";
 import ButtonInfoUser from "../../components/buttons/ButtonInfoUser";
 import GetUsersAllApi from "../../components/getUsersAllApi/GetUsersAllApi"
 import "./getUsers.module.css"
@@ -5,7 +8,8 @@ import "./getUsers.module.css"
 
 export default function GetUsers(){
 
-    const usersAll = GetUsersAllApi();
+    const {getUsers, setGetUsers}  = GetUsersAllApi();
+    
 
     return (
         <>
@@ -13,11 +17,12 @@ export default function GetUsers(){
                     <h1>Pegando todos os usuarios</h1>
                     <ul>
                         {
-                            usersAll.users.map(
+                            getUsers.map(
                                 ( element) => (
                                     <li key={element.id}> 
                                         {element.name} - {element.email} - {element.gender} - {element.status}
-                                        <ButtonInfoUser identificacao={element.id} />
+                                        <ButtonInfoUser identificacao={element.id} /> <br />
+                                        <ButtonDelete info={element.id} reloadData={setGetUsers}/>
                                         <br /><br />
                                     </li> 
                                 )
