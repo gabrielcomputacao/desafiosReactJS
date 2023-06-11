@@ -1,3 +1,7 @@
+import GetUsers from "./pages/getUser/GetUsers"
+
+
+
 
 function App() {
   
@@ -5,7 +9,7 @@ function App() {
   return (
     <>
       <div>
-          teste
+          <GetUsers />
        </div>
     </>
   )
