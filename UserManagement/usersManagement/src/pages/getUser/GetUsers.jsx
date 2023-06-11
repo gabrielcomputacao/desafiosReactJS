@@ -1,3 +1,4 @@
+import ButtonInfoUser from "../../components/buttons/ButtonInfoUser";
 import GetUsersAllApi from "../../components/getUsersAllApi/GetUsersAllApi"
 import "./getUsers.module.css"
 
@@ -16,6 +17,7 @@ export default function GetUsers(){
                                 ( element) => (
                                     <li key={element.id}> 
                                         {element.name} - {element.email} - {element.gender} - {element.status}
+                                        <ButtonInfoUser identificacao={element.id} />
                                         <br /><br />
                                     </li> 
                                 )

@@ -1,4 +1,6 @@
-import GetUsers from "./pages/getUser/GetUsers"
+
+import { BrowserRouter } from "react-router-dom"
+import { RoutesApp } from "./routers/RoutesApp"
 
 
 
@@ -9,7 +11,9 @@ function App() {
   return (
     <>
       <div>
-          <GetUsers />
+        <BrowserRouter>
+          <RoutesApp />
+        </BrowserRouter>
        </div>
     </>
   )
