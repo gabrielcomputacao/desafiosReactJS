@@ -1,8 +1,12 @@
+import { useContext } from "react";
+import ThemeContext from "../../context/ThemeGlobalContext";
 
 
 
 // eslint-disable-next-line react/prop-types
 export default function ButtonDelete({info, reloadData}){
+
+    const { setColor } = useContext(ThemeContext);
 
     function deleteUser(){
 
@@ -26,6 +30,7 @@ export default function ButtonDelete({info, reloadData}){
     return (
         <div>
             <button onClick={deleteUser}> Deletar Usuario</button>
+            <button onClick={() => setColor('#EE82EE')}> Mudar Cor</button>
         </div>
     )
 }

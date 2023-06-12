@@ -22,10 +22,10 @@ export default function FormUser(){
             if(params.id !== undefined){
 
                 fetch(`https://gorest.co.in/public/v1/users/${params.id}`,{
-                    method: "PUT",
+                    method: "PATCH",
                     headers:{
                         Authorization: "Bearer eca27a104c48ad93b32d5a056478cdd5f628176115d7b2e9b55578282caf9b80",
-                        'Content-Type': 'application/x-www-form-urlencoded'
+                        
                    },
                    mode: 'cors',
                    body: JSON.stringify(user),
@@ -36,8 +36,20 @@ export default function FormUser(){
                 }) 
                 .catch(e => console.log(e))
             }else{
-                console.log("sem parametro");
-                return;
+                fetch(`https://gorest.co.in/public/v1/users`, {
+                    method: "POST",
+                    headers:{
+                        Authorization: "Bearer eca27a104c48ad93b32d5a056478cdd5f628176115d7b2e9b55578282caf9b80",
+                        'Content-Type': 'application/json'
+                   },
+                   mode: 'cors',
+                   body: JSON.stringify(user),
+                })
+                .then( result => {
+                    console.log(result);
+                    navigate("/");
+                }) 
+                .catch(e => console.log(e))
             }
         
 

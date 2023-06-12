@@ -12,7 +12,7 @@ export const RoutesApp = () =>{
             <Route  path="/" element={<GetUsers />} />
             <Route  path="*" element={ <Navigate  to="/" /> } />
             <Route  path="user/:id" element={ <User />}  />
-            <Route  path="/formuser/:id" element={<FormUser />} />
+            <Route  path="/formuser/:id?" element={<FormUser />} />
         </Routes>
     )
 
