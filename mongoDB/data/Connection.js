@@ -1,7 +1,7 @@
 
 const mongo = require('mongodb').MongoClient;
 
-const url = "mongodb+srv://dbUser:user123%40@cluster0.jvoamlm.mongodb.net" ;
+const url = "mongodb+srv://gabriel:xVX1OBuJTUjpS7pZ@cluster22.gdv6vnk.mongodb.net/" ;
 
 mongo.connect(url , (error, bancoManagement) =>{
 

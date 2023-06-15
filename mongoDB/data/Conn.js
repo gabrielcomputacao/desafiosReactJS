@@ -12,7 +12,7 @@ async function connectionMongo() {
         /* so faz uma vez  */
         console.log('deu certo a conexao!');
 
-    } catch (erro) {
+    } catch (erro) { 
         console.log(erro)
     }
 
